@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+
+@theme {
+  --font-main: "Wittgenstein", serif;
+  --font-sans: "Kedebideri", sans-serif;
+
+  --breakpoint-tablet: 600px;
+  --breakpoint-laptop: 1025px;
+  --breakpoint-desktop: 1280px;
+
+  --color-lightRed: rgb(255, 92, 55);
+  --color-darkRed: rgba(93 , 34, 22);
+}
+
+
+:root {
+  background-color: var(--color-lightRed);
+}
