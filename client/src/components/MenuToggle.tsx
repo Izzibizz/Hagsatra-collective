@@ -18,12 +18,12 @@ interface MenuToggleProps {
         >
           <span
             className={`absolute block h-0.5 w-full bg-darkRed transition-transform duration-300 
-              ${isOpen? "top-1/2 -translate-y-1/2 rotate-45 bg-lightRed": "top-1/3"}`}
+              ${isOpen? "top-1/2 -translate-y-1/2 rotate-45 bg-darkRed": "top-1/3"}`}
           ></span>
 
           <span
             className={`absolute block h-0.5 w-full bg-darkRed transition-transform duration-300 
-              ${isOpen? "top-1/2 -translate-y-1/2 -rotate-45 bg-lightRed" : "top-2/3 translate-x-2"}`}
+              ${isOpen? "top-1/2 -translate-y-1/2 -rotate-45 bg-darkRed" : "top-2/3 translate-x-2"}`}
           ></span>
         </button>
       );

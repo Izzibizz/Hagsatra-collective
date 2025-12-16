@@ -18,7 +18,7 @@ export const Hero: React.FC<HeroProps> = ({
       {(imageUrlLaptop || imageUrlMobile) && (
         <img
           src={isLaptop ? imageUrlLaptop : imageUrlMobile}
-          className="w-10/12 mx-auto max-h-[80vh]"
+          className=" max-h-[80vh]"
           alt="konstnärsateljeer"
         />
       )}

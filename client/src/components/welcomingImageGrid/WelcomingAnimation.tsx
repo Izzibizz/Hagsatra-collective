@@ -17,7 +17,7 @@ export const WelcomingAnimation: React.FC <Props> = ({ data, onComplete }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       if (onComplete) onComplete(); // anropa callback
-    }, 2000); // duration av animation
+    }, 2600); // duration av animation
     return () => clearTimeout(timer);
   }, [onComplete]);
 

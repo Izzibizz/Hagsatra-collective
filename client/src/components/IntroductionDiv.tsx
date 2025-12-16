@@ -14,11 +14,8 @@ type IntroductionProps = {
 
 export const Introductionsection: React.FC<IntroductionProps> = ({ data }) => {
   return (
-    <section className="bg-darkRed rounded-t-4xl p-20 text-lightRed">
-      <div className="laptop:w-10/12 mx-auto">
+    <section className="bg-darkRed h-[200px] rounded-t-4xl py-20 px-6 text-lightRed">
       <RotatingText texts={data.texts} interval={data.interval}/>
-    {/*   <img src={data.introImage} className="laptop:w-1/3 laptop:max-w-500px]" alt="skaparverkstad"/> */}
-      </div>
     </section>
   )
 }

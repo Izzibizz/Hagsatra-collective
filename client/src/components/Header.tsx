@@ -144,10 +144,10 @@ export const Header: React.FC = () => {
                 animate={{ clipPath: "circle(150% at 50% 50%)" }}
                 exit={{ clipPath: "circle(5% at 100% 0%)" }}
                 transition={{ duration: 0.8, ease: "easeInOut" }}
-                className={`fixed top-0 right-0 h-screen w-screen overflow-hidden bg-darkRed text-xl backdrop-blur-xl flex justify-end px-10 `}
+                className={`fixed top-0 right-0 h-screen w-screen overflow-hidden bg-lightRed text-xl backdrop-blur-xl flex justify-end px-10 `}
                 ref={dropdownRef}
               >
-                <ul className="flex flex-col laptop:flex-row items-end gap-5 text-lightRed absolute bottom-28 tablet:bottom-40 animate-fadeIn">
+                <ul className="flex flex-col laptop:flex-row items-end gap-5 text-darkRed absolute bottom-28 tablet:bottom-40 animate-fadeIn">
                   {navlinks.map((link) => (
                     <NavLink
                       key={link.path}

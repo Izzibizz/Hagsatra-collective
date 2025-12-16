@@ -16,7 +16,7 @@ type WelcomingBlock = {
 };
 
 const App: React.FC = () => {
-  const [animationData, setAnimationData] = useState<WelcomingBlock | null>(null);
+const [animationData, setAnimationData] = useState<WelcomingBlock | null>(null);
 const showIntro = usePageStore(state => state.showIntro);
 const hideIntro = usePageStore(state => state.hideIntro);
 
