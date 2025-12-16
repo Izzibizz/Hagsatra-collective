@@ -1,6 +1,5 @@
 @import "tailwindcss";
 
-
 @theme {
   --font-main: "Wittgenstein", serif;
   --font-sans: "Kedebideri", sans-serif;
@@ -10,9 +9,20 @@
   --breakpoint-desktop: 1280px;
 
   --color-lightRed: rgb(255, 92, 55);
-  --color-darkRed: rgba(93 , 34, 22);
+  --color-darkRed: rgba(93,33,33);
+
+  --animate-fadeIn: fadeIn 1s ease-in both;
+  --animate-longFadeIn: fadeIn 2.3s ease-in both;
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 
 :root {
   background-color: var(--color-lightRed);

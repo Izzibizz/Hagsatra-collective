@@ -1,4 +1,3 @@
-
 import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, NavLink, useLocation } from "react-router-dom";
@@ -8,16 +7,16 @@ export const Header: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
-  const [smallerHeader, setSmallerHeader] = useState(false); 
+  const [smallerHeader, setSmallerHeader] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 1025);
-  const isHome = location.pathname === "/"
+  const isHome = location.pathname === "/";
   const dropdownRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   const navlinks = [
     { name: "Lediga ateljéer", path: "/lediga-ateljeer" },
-    { name: "Om oss", path: "/om-oss" },
     { name: "Aktiviteter", path: "/aktiviteter" },
+    { name: "Om oss", path: "/om-oss" },
     { name: "Kontakt", path: "/kontakt" },
   ];
 
@@ -61,7 +60,7 @@ export const Header: React.FC = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []); 
+  }, []);
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 1025);
@@ -99,19 +98,45 @@ export const Header: React.FC = () => {
   return (
     <header
       className={`fixed top-0 left-0 w-screen font-main flex justify-between p-4 pr-6 tablet:p-6 laptop:px-8 items-center z-70
-       text-white  ${scrolled ? "bg-lightRed" : "bg-none"}`}
+       text-darkRed  ${scrolled ? "bg-lightRed" : "bg-none"} animate-fadeIn`}
     >
-      <div className="flex gap-6 items-center cursor-pointer"  onClick={() => logoClick()} > <img src={isMobile && smallerHeader ? "https://res.cloudinary.com/dsh7dqhgv/image/upload/v1764855897/HC-Logotyp-monogram-dark-red-Hags%C3%A4tra-collective_f9niat.svg" : isMobile ? "https://res.cloudinary.com/dsh7dqhgv/image/upload/v1764855986/HC-Logotyp-dark_o3ka8u.svg" :  "https://res.cloudinary.com/dsh7dqhgv/image/upload/v1764855897/HC-Logotyp-monogram-dark-red-Hags%C3%A4tra-collective_f9niat.svg"} className={` ${smallerHeader ? "w-[60px] transform transition-transform duration-200" : "w-[100px] transform transition-transform duration-200" }  ${!isHome && "hover:scale-105 transform transition-transform duration-100"}`} alt="HC logga"/>
-     {!isMobile && <img src="https://res.cloudinary.com/dsh7dqhgv/image/upload/v1764856133/text-hagsatra-collective_qxzcnn.svg" className={`w-[150px] ${!isHome && "hover:scale-105 transform transition-transform duration-100"}`} alt="hagsätra collective" />}
-      </div>{isMobile ? (
-        <>
-       
-          <MenuToggle
-            isOpen={isOpen}
-            toggleMenu={toggleMenu}
-            ref={buttonRef}
-           
+      <div
+        className="flex gap-6 items-center cursor-pointer"
+        onClick={() => logoClick()}
+      >
+        {" "}
+        <img
+          src={
+            isMobile && smallerHeader
+              ? "https://res.cloudinary.com/dsh7dqhgv/image/upload/v1764855897/HC-Logotyp-monogram-dark-red-Hags%C3%A4tra-collective_f9niat.svg"
+              : isMobile
+              ? "https://res.cloudinary.com/dsh7dqhgv/image/upload/v1764855986/HC-Logotyp-dark_o3ka8u.svg"
+              : "https://res.cloudinary.com/dsh7dqhgv/image/upload/v1764855897/HC-Logotyp-monogram-dark-red-Hags%C3%A4tra-collective_f9niat.svg"
+          }
+          className={` ${
+            smallerHeader
+              ? "w-[60px] transform transition-transform duration-200"
+              : "w-[100px] transform transition-transform duration-200"
+          }  ${
+            !isHome &&
+            "hover:scale-105 transform transition-transform duration-100"
+          }`}
+          alt="HC logga"
+        />
+        {!isMobile && (
+          <img
+            src="https://res.cloudinary.com/dsh7dqhgv/image/upload/v1764856133/text-hagsatra-collective_qxzcnn.svg"
+            className={`w-[150px] ${
+              !isHome &&
+              "hover:scale-105 transform transition-transform duration-100"
+            }`}
+            alt="hagsätra collective"
           />
+        )}
+      </div>
+      {isMobile ? (
+        <>
+          <MenuToggle isOpen={isOpen} toggleMenu={toggleMenu} ref={buttonRef} />
           <AnimatePresence>
             {isOpen && isMobile && (
               <motion.div
@@ -149,7 +174,7 @@ export const Header: React.FC = () => {
                 key={link.path}
                 to={link.path}
                 onClick={closeMenu}
-                className="hover:scale-105 transform transition-transform duration-100"
+                className="hover:scale-105 hover:text-white transform transition-transform duration-100"
               >
                 {link.name}
               </NavLink>

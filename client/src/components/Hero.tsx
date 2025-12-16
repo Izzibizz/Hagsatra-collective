@@ -1,9 +1,28 @@
+import { useIsLaptop } from "../hooks/IsLaptop";
 
-export const Hero: React.FC = () => {
+type HeroProps = {
+  imageUrlLaptop: string;
+  imageUrlMobile: string;
+  symbol: string;
+};
+
+export const Hero: React.FC<HeroProps> = ({
+  imageUrlLaptop,
+  imageUrlMobile,
+  symbol,
+}) => {
+  const isLaptop = useIsLaptop();
+
   return (
-    <section className="pb-6 min-h-[50vh]">
-     <img src="https://res.cloudinary.com/dsh7dqhgv/image/upload/v1764855712/konstn%C3%A4rsateljeer_pbro78.svg" className="w-10/12 mx-auto" alt="konstnärsateljeer" />
+    <section className="pb-10 min-h-[50vh] max-h-[90vh] animate-fadeIn flex flex-col gap-6">
+      {(imageUrlLaptop || imageUrlMobile) && (
+        <img
+          src={isLaptop ? imageUrlLaptop : imageUrlMobile}
+          className="w-10/12 mx-auto max-h-[80vh]"
+          alt="konstnärsateljeer"
+        />
+      )}
+      {!isLaptop && symbol && <img src={symbol} alt="symbol" className="" />}
     </section>
-  )
-}
-
+  );
+};

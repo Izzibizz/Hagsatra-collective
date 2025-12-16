@@ -1,13 +1,93 @@
-import { BannerDiv } from "../components/BannerDiv"
-import { Hero } from "../components/Hero"
-import { Introductionsection } from "../components/IntroductionDiv"
+import { useState, useEffect } from "react";
+import { BannerDiv } from "../components/BannerDiv";
+import { Hero } from "../components/Hero";
+import { Introductionsection } from "../components/IntroductionDiv";
+import { sanity } from "../library/SanityClient";
+import { usePageStore } from "../stores/pageStore";
+
+type HeroBlock = {
+  _type: "heroBlock";
+  imageUrlLaptop: string;
+  imageUrlMobile: string;
+  symbol: string;
+};
+
+type BannerBlock = {
+  _type: "bannerBlock";
+  imageUrl: string;
+};
+
+type TextBlock = {
+  _type: "textBlock";
+  title: string;
+  body: string;
+};
+
+type IntroductionBlock = {
+  _type: "introductionBlock";
+  title: string;
+  introImage: string;
+  texts: string[];
+  interval?: number;
+};
+
+
+type Section = HeroBlock | IntroductionBlock | BannerBlock | TextBlock ;
+
+type Page = {
+  title: string;
+  sections: Section[];
+};
 
 export const HomePage: React.FC = () => {
-  return (
-    <section className="bg-lightRed text-black">
-      < Hero />
-      <Introductionsection/>
-      <BannerDiv />
+  const [pageData, setPageData] = useState<Page | null>(null);
+  const showIntro = usePageStore(state => state.showIntro)
+
+  useEffect(() => {
+   sanity.fetch(`
+  *[_type == "page" && slug.current == "home"][0]{
+    title,
+    sections[]{
+      _type,
+      title,
+      body,
+      texts,
+      interval,
+      introImage,
+      imageUrlLaptop,
+      imageUrlMobile,
+      symbol,
+      imageUrl
+    }
+  }
+`).then(setPageData);
+  }, []);
+
+  console.log(pageData);
+
+  return !showIntro && (
+    <section className="bg-lightRed text-black animate-fadeIn">
+      {pageData?.sections.map((section, i) => {
+        switch (section._type) {
+          case "heroBlock":
+            return (
+              <Hero
+                key={i}
+                imageUrlLaptop={section.imageUrlLaptop}
+                imageUrlMobile={section.imageUrlMobile}
+                symbol={section.symbol}
+              />
+            );
+          case "bannerBlock":
+            return <BannerDiv key={i} imageUrl={section.imageUrl} />;
+
+                  case "introductionBlock":
+            return <Introductionsection key={i} data={section} />;
+
+          default:
+            return null;
+        }
+      })}
     </section>
-  )
-}
+  );
+};
