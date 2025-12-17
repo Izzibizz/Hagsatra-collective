@@ -1,8 +1,17 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'hagsatra';
+  src: url('./assets//HagsatraCollective-Regular.otf') format('otf');
+  font-weight: 400; /* normal vikt */
+  font-style: normal;
+  font-display: swap; /* snabbare render */
+}
+
 @theme {
   --font-main: "Wittgenstein", serif;
   --font-sans: "Kedebideri", sans-serif;
+  --font-hagsatra: "hagsatra", sans-serif;
 
   --breakpoint-tablet: 600px;
   --breakpoint-laptop: 1025px;

@@ -43,7 +43,7 @@ const hideIntro = usePageStore(state => state.hideIntro);
           <WelcomingAnimation data={animationData} onComplete={hideIntro}/>
         </div>
       )}
-    <div className={`max-w-screen min-h-screen flex flex-col overflow-hidden relative font-main`}>
+    <div className={`max-w-screen min-h-screen flex flex-col overflow-hidden relative font-main text-darkRed`}>
       <Header />
       <main className={`flex-grow mb-20 laptop:mb-10 ${"pt-38 laptop:pt-24"} `}>
         <Routes />
