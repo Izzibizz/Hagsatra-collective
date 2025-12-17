@@ -1,13 +1,17 @@
 import { useEffect } from "react";
 import { MdOutlineArrowOutward } from "react-icons/md";
 import { sanity } from "../library/SanityClient";
+import { useLocation } from "react-router";
 import { usePageStore } from "../stores/pageStore";
 import mail from "/mail.png";
-import instagram from "/instagram.png"
+import instagram from "/instagram.png";
 
 export const Footer: React.FC = () => {
   const contactData = usePageStore((state) => state.contactData);
   const updateContactData = usePageStore((state) => state.updateContactData);
+  const location = useLocation();
+  const showContactInfo = location.pathname !== "/kontakt"
+
 
   useEffect(() => {
     sanity
@@ -29,10 +33,13 @@ export const Footer: React.FC = () => {
   console.log(contactData);
   return (
     <footer className="absolute bottom-0 left-0 flex flex-col gap-4 w-screen h-fit p-2 laptop:px-6 font-sans text-darkRed">
+      {showContactInfo && (
       <div className="flex justify-between px-6">
         <div className="flex flex-col gap-6">
           <a
-            href={contactData.instagram} rel="noopener noreferer" target="_blank"
+            href={contactData.instagram}
+            rel="noopener noreferer"
+            target="_blank"
             className="flex items-center gap-4"
           >
             <img src={instagram} className="w-[30px]" alt="mail" />
@@ -54,6 +61,7 @@ export const Footer: React.FC = () => {
           </p>
         </div>
       </div>
+      )}
       <div className="flex justify-between">
         <a
           href="http://izabellind.com"
