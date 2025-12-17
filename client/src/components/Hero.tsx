@@ -14,7 +14,7 @@ export const Hero: React.FC<HeroProps> = ({
   const isLaptop = useIsLaptop();
 
   return (
-    <section className="pb-10 min-h-[50vh] max-h-[90vh] animate-fadeIn flex flex-col gap-6">
+    <section className="pb-10 min-h-[50vh] laptop:max-h-[90vh] animate-fadeIn flex flex-col gap-6">
       {(imageUrlLaptop || imageUrlMobile) && (
         <img
           src={isLaptop ? imageUrlLaptop : imageUrlMobile}

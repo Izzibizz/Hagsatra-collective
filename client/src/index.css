@@ -2,7 +2,7 @@
 
 @font-face {
   font-family: 'hagsatra';
-  src: url('./assets//HagsatraCollective-Regular.otf') format('otf');
+  src: url('./assets/fonts/HagsatraCollective-Regular.otf') format('opentype');
   font-weight: 400; /* normal vikt */
   font-style: normal;
   font-display: swap; /* snabbare render */

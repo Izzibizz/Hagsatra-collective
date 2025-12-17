@@ -2,7 +2,7 @@ import { create } from "zustand";
 
 const STORAGE_KEY = "hc_intro_seen";
 
-type ContactProps = {
+type AddressProps = {
  street: string
   postalCode: string
   city: string
@@ -11,6 +11,11 @@ type ContactProps = {
     lat: number
     lng: number
   }
+}
+type ContactProps = {
+  address: AddressProps;
+  instagram: string;
+  mail: string;
 }
 
 type PageState = {
@@ -30,11 +35,15 @@ export const usePageStore = create<PageState>((set) => {
       set({ showIntro: false });
     },
      contactData: {
+      address: {
       street: '',
       postalCode: '',
       city: '',
       country: '',
       location: { lat: 0, lng: 0 },
+      },
+      instagram: "",
+      mail: ""
     },
     updateContactData: (data: ContactProps) =>
       set({ contactData: data }),

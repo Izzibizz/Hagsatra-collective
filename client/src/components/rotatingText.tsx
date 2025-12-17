@@ -48,7 +48,7 @@ export const RotatingText: React.FC<RotatingTextProps> = ({
   }, [text]);
 
   return (
-    <div className="flex flex-wrap justify-center laptop:text-3xl">
+    <div className="flex flex-wrap justify-center tablet:text-3xl">
   {splitTextToWords(text).map((letters, wordIndex) => (
     <span key={wordIndex} className={`flex flex-wrap ${isLaptop ? "mr-2" : "mr-1"}`}>
       {letters.map((char, i) => {

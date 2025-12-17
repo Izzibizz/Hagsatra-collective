@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { MdOutlineArrowOutward } from "react-icons/md";
 import { sanity } from "../library/SanityClient";
 import { usePageStore } from "../stores/pageStore";
+import mail from "/mail.png";
+import instagram from "/instagram.png"
 
 export const Footer: React.FC = () => {
   const contactData = usePageStore((state) => state.contactData);
@@ -19,17 +21,38 @@ export const Footer: React.FC = () => {
       )
       .then((res) => {
         if (res?.address) {
-          updateContactData(res.address);
+          updateContactData(res);
         }
       });
   }, [updateContactData]);
 
   console.log(contactData);
   return (
-    <footer className="absolute bottom-0 left-0 flex flex-col w-screen h-fit p-2 laptop:px-6 font-sans text-darkRed">
-      <div className="flex flex-col">
-        <h4>Adress</h4>
-        <p>{contactData.street}</p>
+    <footer className="absolute bottom-0 left-0 flex flex-col gap-4 w-screen h-fit p-2 laptop:px-6 font-sans text-darkRed">
+      <div className="flex justify-between px-6">
+        <div className="flex flex-col gap-6">
+          <a
+            href={contactData.instagram} rel="noopener noreferer" target="_blank"
+            className="flex items-center gap-4"
+          >
+            <img src={instagram} className="w-[30px]" alt="mail" />
+            @hagsatracollective
+          </a>
+          <a
+            href={`mailto:${contactData.mail}`}
+            className="flex items-center gap-4"
+          >
+            <img src={mail} className="w-[30px]" alt="mail" />
+            {contactData.mail}
+          </a>
+        </div>
+        <div className="flex flex-col">
+          <h4>Besöksadress</h4>
+          <p className="text-sm">{contactData.address.street}</p>
+          <p className="text-sm">
+            {contactData.address.postalCode} {contactData.address.city}
+          </p>
+        </div>
       </div>
       <div className="flex justify-between">
         <a
