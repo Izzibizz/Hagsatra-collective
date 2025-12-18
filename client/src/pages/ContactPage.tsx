@@ -10,7 +10,7 @@ export const ContactPage: React.FC = () => {
   console.log(contactData)
 
   return (
-    <section className="w-11/12 laptop:9/12 mx-auto mt-6 mb-10 tablet:mt-24 flex flex-col laptop:flex-row gap-10">
+    <section className="w-11/12 laptop:9/12 mx-auto mt-6 mb-4 tablet:mt-24 flex flex-col laptop:flex-row gap-10">
       <h2 className="text-3xl">Kontakt</h2>
       <div className="flex flex-col gap-10 justify-between px-6 tablet:grid grid-cols-2">
         <div className="flex flex-col gap-6">

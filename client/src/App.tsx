@@ -45,7 +45,7 @@ const hideIntro = usePageStore(state => state.hideIntro);
       )}
     <div className={`max-w-screen min-h-screen flex flex-col overflow-hidden relative font-main text-darkRed`}>
       <Header />
-      <main className={`flex-grow mb-[180px] laptop:mb-[120px] ${"pt-38 laptop:pt-24"} `}>
+      <main className={`flex-grow mb-24 ${"pt-38 laptop:pt-24"} `}>
         <Routes />
       </main>
       <Footer/>

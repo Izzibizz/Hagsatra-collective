@@ -32,7 +32,7 @@ export const Footer: React.FC = () => {
 
   console.log(contactData);
   return (
-    <footer className="absolute bottom-0 left-0 flex flex-col gap-4 w-screen h-fit p-2 laptop:px-6 font-sans text-darkRed">
+    <footer className="flex flex-col gap-10 w-screen h-fit p-2 laptop:px-6 font-sans text-darkRed">
       {showContactInfo && (
       <div className="flex justify-between px-6">
         <div className="flex flex-col gap-6">
@@ -62,7 +62,7 @@ export const Footer: React.FC = () => {
         </div>
       </div>
       )}
-      <div className="flex justify-between">
+      <div className="flex justify-between px-6">
         <a
           href="http://izabellind.com"
           className="relative max-w-1/2 tablet:max-w-full flex gap-2 items-center text-[9px] after:content-[''] after:block after:w-0 after:h-[1px] after:bg-stone-500 after:absolute after:left-0 after:bottom-0 after:transition-all after:duration-300 hover:after:w-full"
