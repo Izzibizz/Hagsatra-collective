@@ -18,7 +18,7 @@ export const ContactForm: React.FC = () => {
       noValidate
       className="bg-darkRed text-lightRed p-8 rounded-4xl flex flex-col gap-10 laptop:max-w-[1000px]"
     >
-      <h3 className="font-hagsatra text-4xl">KONTAKTA OSS</h3>
+      <h3 className="font-hagsatra text-4xl text-center tablet:text-start">KONTAKTA OSS</h3>
       {state.succeeded ? (
         <div className="laptop:w-1/2 mx-auto flex flex-col justify-center">
           <p>
