@@ -22,7 +22,7 @@ export const ContactForm: React.FC = () => {
       {state.succeeded ? (
         <div className="laptop:w-1/2 mx-auto flex flex-col justify-center">
           <p>
-            Tack för ditt mail! Vi är en idéell förening och gör vårt bästa att
+            Tack för ditt mail! Vi är en ideell förening och gör vårt bästa att
             återkomma så snart vi kan.
           </p>
         </div>
