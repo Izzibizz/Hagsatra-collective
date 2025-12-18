@@ -34,7 +34,7 @@ export const Footer: React.FC = () => {
   return (
     <footer className="flex flex-col gap-10 w-screen h-fit p-2 laptop:px-6 font-sans text-darkRed">
       {showContactInfo && (
-      <div className="flex justify-between px-6">
+      <div className="flex flex-col gap-8 px-6">
         <div className="flex flex-col gap-6">
           <a
             href={contactData.instagram}
