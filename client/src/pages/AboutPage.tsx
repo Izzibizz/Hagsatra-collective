@@ -1,6 +1,7 @@
 import { sanity } from "../library/SanityClient";
 import { useEffect, useState } from "react";
 import { useIsLaptop } from "../hooks/IsLaptop";
+import type { PortableTextBlock } from "@portabletext/types";
 import { PortableText } from "@portabletext/react";
 
 type AboutData = {
@@ -8,7 +9,7 @@ type AboutData = {
   IntroText: string;
   historyText: string;
   titleImage: string;
-  thanksTo: [];
+  thanksTo: PortableTextBlock[];
   activities: {
     h3: string;
     body: string;
@@ -96,23 +97,25 @@ export const AboutPage: React.FC = () => {
           className="tablet:w-1/2"
         />
       )}
-      <PortableText
-  value={aboutData?.thanksTo}
-  components={{
-    marks: {
-      link: ({ value, children }) => (
-        <a
-          href={value.href}
-          target={value.blank ? "_blank" : "_self"}
-          rel="noopener noreferrer"
-          className="underline hover:opacity-80"
-        >
-          {children}
-        </a>
-      )
-    }
-  }}
-/>
+      {aboutData?.thanksTo && (
+        <PortableText
+          value={aboutData?.thanksTo}
+          components={{
+            marks: {
+              link: ({ value, children }) => (
+                <a
+                  href={value.href}
+                  target={value.blank ? "_blank" : "_self"}
+                  rel="noopener noreferrer"
+                  className="underline hover:opacity-80"
+                >
+                  {children}
+                </a>
+              ),
+            },
+          }}
+        />
+      )}
     </section>
   );
 };
