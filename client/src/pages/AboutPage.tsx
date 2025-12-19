@@ -15,7 +15,7 @@ type AboutData = {
     body: string;
     titleImage: string;
     images: {
-      url: string;
+      image: string;
       caption?: string;
     }[];
   };
@@ -81,8 +81,8 @@ export const AboutPage: React.FC = () => {
             className="tablet:w-1/2"
             alt="Vilka är vi?"
           />
-          <p className="tablet:w-2/3 laptop:w-1/2">{aboutData?.IntroText}</p>
-          <p className="">{aboutData?.historyText}</p>
+          <p className="tablet:w-2/3 laptop:w-2/3">{aboutData?.IntroText}</p>
+          <p className="tablet:w-2/3 laptop:w-2/3">{aboutData?.historyText}</p>
         </div>
         {isLaptop && (
           <img
@@ -116,6 +116,10 @@ export const AboutPage: React.FC = () => {
           }}
         />
       )}
+      <div className="flex flex-col laptop:flex-row gap-8">
+      <img src={aboutData?.activities.images[0].image} className="tablet:w-1/3 laptop:w-1/2 aspect-[3/2] object-cover" alt="aktivitet"/>
+       <img src={aboutData?.activities.images[1].image} className="tablet:w-1/3 laptop:w-1/2 aspect-[3/2] object-cover laptop:max-w-[500px]" alt="aktivitet"/>
+      </div>
     </section>
   );
 };
