@@ -1,4 +1,6 @@
 import { defineType, defineField } from "sanity";
+import introductionBlock from "./introductionBlock";
+import welcomingBlock from "./welcomingBlock";
 
 export default defineType({
   name: "page",
@@ -27,6 +29,12 @@ export default defineType({
         { type: "textBlock" },
         { type: "imageBlock" },
         { type: "videoBlock" },
+        { type: "heroBlock"},
+        { type: "bannerBlock"},
+        { type: "introductionBlock"},
+        { type: "welcomingBlock"},
+        { type: "contactBlock"},
+        { type: "aboutBlock"},
       ],
     }),
   ],

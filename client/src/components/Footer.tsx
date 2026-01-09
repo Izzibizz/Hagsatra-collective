@@ -34,8 +34,7 @@ export const Footer: React.FC = () => {
   return (
     <footer className="flex flex-col gap-10 w-screen h-fit p-2 laptop:px-6 font-sans text-darkRed">
       {showContactInfo && (
-      <div className="flex flex-col gap-8 px-6">
-        <div className="flex flex-col gap-6">
+      <div className="flex flex-col tablet:flex-row tablet:justify-between laptop:w-2/3 laptop:max-w-[800px] tablet:mx-auto gap-8 px-6">
           <a
             href={contactData.instagram}
             rel="noopener noreferer"
@@ -52,7 +51,6 @@ export const Footer: React.FC = () => {
             <img src={mail} className="w-[30px]" alt="mail" />
             {contactData.mail}
           </a>
-        </div>
         <div className="flex flex-col">
           <h4>Besöksadress</h4>
           <p className="text-sm">{contactData.address.street}</p>

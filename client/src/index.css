@@ -8,6 +8,14 @@
   font-display: swap; /* snabbare render */
 }
 
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;  /* IE och Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+
 @theme {
   --font-main: "Wittgenstein", serif;
   --font-sans: "Kedebideri", sans-serif;
