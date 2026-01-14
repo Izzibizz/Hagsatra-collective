@@ -1,16 +1,72 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { sanity } from "../library/SanityClient";
 import { useForm, ValidationError } from "@formspree/react";
 import { Check } from "lucide-react";
+import { usePageStore } from "../stores/pageStore";
+
+export type AvailableStudio = {
+  name: string;
+  size?: number;
+  image?: string;
+  description?: string;
+  price?: number;
+  availableFrom?: string;
+};
+
+export type StudiosBlock = {
+  _type: "studiosBlock";
+  imageUrl: string;
+  h2LaptopImageUrl: string;
+  h2MobileImageUrl: string;
+  h2AvailableLaptopImageUrl: string;
+  h2AvailableMobileImageUrl: string;
+  locationImageUrl: string;
+  description: string;
+  availability: "yes" | "no";
+  availableStudios?: AvailableStudio[];
+};
+
+type StudioPageData = {
+  title: string;
+  sections: StudiosBlock[];
+};
 
 export const ContactForm: React.FC = () => {
   const [state, handleSubmit] = useForm("xjknndwn");
   const [isChecked, setIsChecked] = useState(false);
-
+  const [studioData, setStudioData] = useState<StudioPageData | null>(null);
+  const isEnglish = usePageStore((state) => state.isEnglish);
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsChecked(e.target.checked);
   };
 
-  console.log(isChecked)
+  const studiosBlock = studioData?.sections.find(
+    (section) => section._type === "studiosBlock"
+  );
+
+  const hasAvailableStudios =
+    studiosBlock?.availability === "yes" &&
+    studiosBlock?.availableStudios &&
+    studiosBlock.availableStudios.length > 0;
+
+  useEffect(() => {
+    const slug = isEnglish ? "studioEng" : "studio";
+    sanity
+      .fetch(
+        `
+    *[_type == "page" && slug.current == "${slug}"][0]{
+      title,
+      sections[]
+    }
+  `
+      )
+      .then((data) => {
+        console.log("FETCH RESULT:", data);
+        setStudioData(data);
+      });
+  }, [isEnglish]);
+
+  console.log(isChecked);
 
   return (
     <form
@@ -18,12 +74,15 @@ export const ContactForm: React.FC = () => {
       noValidate
       className="bg-darkRed text-lightRed p-8 rounded-4xl flex flex-col gap-10 tablet:w-[90vw] laptop:min-w-[600px] laptop:w-[800px] tablet:self-center"
     >
-      <h3 className="font-hagsatra text-4xl text-center tablet:text-start">KONTAKTA OSS</h3>
+      <h3 className="font-hagsatra text-4xl text-center tablet:text-start">
+        {isEnglish ? "GET IN TOUCH" : "KONTAKTA OSS"}
+      </h3>
       {state.succeeded ? (
-        <div className="laptop:w-1/2 mx-auto flex flex-col justify-center">
+        <div className="laptop:w-2/3 flex flex-col ">
           <p>
-            Tack för ditt mail! Vi är en ideell förening och gör vårt bästa att
-            återkomma så snart vi kan.
+            {isEnglish
+              ? "Thanks for your email! We are a non-profit association and we'll do our best to get back to you ASAP"
+              : "Tack för ditt mail! Vi är en ideell förening och gör vårt bästa att återkomma så snart vi kan."}
           </p>
         </div>
       ) : (
@@ -31,7 +90,7 @@ export const ContactForm: React.FC = () => {
           <div className="flex flex-col gap-6">
             {/* Förnamn */}
             <label htmlFor="firstName" className="flex flex-col gap-2">
-              Förnamn
+              {isEnglish ? "First name" : "Förnamn"}
               <input
                 id="firstName"
                 type="text"
@@ -48,7 +107,7 @@ export const ContactForm: React.FC = () => {
 
             {/* Efternamn */}
             <label htmlFor="lastName" className="flex flex-col gap-2">
-              Efternamn
+              {isEnglish ? "Last name" : "Efternamn"}
               <input
                 id="lastName"
                 type="text"
@@ -65,7 +124,7 @@ export const ContactForm: React.FC = () => {
 
             {/* Email */}
             <label htmlFor="email" className="flex flex-col gap-2">
-              E-postadress
+              {isEnglish ? "Email" : "E-postadress"}
               <input
                 id="email"
                 type="email"
@@ -98,56 +157,116 @@ export const ContactForm: React.FC = () => {
                 {isChecked && <Check size={14} className="text-darkRed" />}
               </div>
 
-              <span>Vill du hyra ateljé?</span>
+              <span>
+                {" "}
+                {isEnglish
+                  ? "Interested in renting a studio?"
+                  : "Vill du hyra ateljé?"}
+              </span>
             </label>
-            
+            {isChecked && hasAvailableStudios && (
+              <div className="flex flex-col gap-4">
+                <p className="font-semibold">
+                  {isEnglish ? "Available now, interested?" : "Ledigt just nu, intresserad?"}
+                </p>
+
+                {studiosBlock!.availableStudios!.map((studio, index) => (
+                  <label
+                    key={index}
+                    className="flex items-center gap-3 cursor-pointer"
+                  >
+                    <input
+                      type="checkbox"
+                      name="selectedStudios"
+                      value={studio.name}
+                      className="hidden peer"
+                    />
+
+                    {/* Visuell checkbox */}
+                    <div className="w-5 h-5 border border-lightRed rounded-sm flex items-center justify-center peer-checked:bg-lightRed">
+                      <Check
+                        size={14}
+                        className="text-darkRed peer-checked:opacity-100"
+                      />
+                    </div>
+
+                    <span>
+                      {studio.name}
+                      {studio.size && ` – ${studio.size} kvm`}
+                      {studio.price && ` (${studio.price} kr/mån)`}
+                    </span>
+                  </label>
+                ))}
+              </div>
+            )}
+
             {/* Konstnärlig praktik */}
             {isChecked && (
-            <label htmlFor="practice" className="flex flex-col gap-2">
-              Konstnärlig praktik
-              <input
-                id="practice"
-                type="text"
-                name="practice"
-                className="bg-lightRed text-darkRed rounded-4xl p-1 px-2"
-              />
-              <ValidationError
-                prefix="Konstnärlig praktik"
-                field="practice"
-                errors={state.errors}
-              />
-            </label>
+              <label htmlFor="practice" className="flex flex-col gap-2">
+                {isEnglish ? "Artistic practice" : "Konstnärlig praktik"}
+                <input
+                  id="practice"
+                  type="text"
+                  name="practice"
+                  className="bg-lightRed text-darkRed rounded-4xl p-1 px-2"
+                />
+                <ValidationError
+                  prefix="Konstnärlig praktik"
+                  field="practice"
+                  errors={state.errors}
+                />
+              </label>
             )}
           </div>
           <div className="flex flex-col gap-6">
             {/* Önskad ateljéstorlek */}
             {isChecked && (
-            <label htmlFor="studioSize" className="flex flex-col gap-2">
-              Önskad ateljéstorlek
-              <select
-                id="studioSize"
-                name="studioSize"
-                className="bg-lightRed text-darkRed rounded-4xl p-1 px-2"
-                required
-              >
-                <option value="">välj..</option>
-                <option value="5kvm">Ca 5 kvm (ca 1383 kr/mån)</option>
-                <option value="10kvm">Ca 10 kvm (ca 2515 kr/mån)</option>
-                <option value="15kvm">Ca 15 kvm (ca 3648 kr/mån)</option>
-                <option value="20+kcm">20 + kvm (ca 4780 kr +/mån)</option>
-              </select>
-              Priser är inkl. moms och medlemsavgift
-            </label>
+              <label htmlFor="studioSize" className="flex flex-col gap-2">
+                {isEnglish
+                  ? "Preffered studio size/price"
+                  : "Önskad ateljéstorlek/pris"}
+                <select
+                  id="studioSize"
+                  name="studioSize"
+                  className="bg-lightRed text-darkRed rounded-4xl p-1 px-2"
+                  required
+                >
+                  <option value=""> {isEnglish ? "Choose.." : "välj.."}</option>
+                  <option value="5kvm">
+                    {isEnglish
+                      ? "Approx. 5 sqm (approx. 1383 SEK/month)"
+                      : "Ca 5 kvm (ca 1383 kr/mån)"}
+                  </option>
+                  <option value="10kvm">
+                    {isEnglish
+                      ? "Approx. 10 sqm (approx. 2515 SEK/month)"
+                      : "Ca 10 kvm (ca 2515 kr/mån)"}
+                  </option>
+                  <option value="15kvm">
+                    {isEnglish
+                      ? "Approx. 15 sqm (approx. 3648 SEK/month)"
+                      : "Ca 15 kvm (ca 3648 kr/mån)"}
+                  </option>
+                  <option value="20+kcm">
+                    {isEnglish
+                      ? "20+ sqm (approx. 4780 SEK+/month)"
+                      : "20+ kvm (ca 4780 kr+/mån)"}
+                  </option>
+                </select>
+                {isEnglish
+                  ? "Prices are inc. VAT and membership fee"
+                  : "Priser är inkl. moms och medlemsavgift"}
+              </label>
             )}
             <ValidationError
               prefix="Ateljéstorlek"
               field="studioSize"
               errors={state.errors}
             />
-            
+
             {/* Kommentar */}
             <label htmlFor="comment" className="flex flex-col gap-2">
-              Kommentar
+              {isEnglish ? "Comment" : "Kommentar"}
               <textarea
                 id="comment"
                 name="comment"
@@ -166,7 +285,7 @@ export const ContactForm: React.FC = () => {
               disabled={state.submitting}
               className="bg-lightRed hover:bg-white text-darkRed w-fit px-8 py-2 self-end rounded-4xl"
             >
-              Skicka
+              {isEnglish ? "Send" : "Skicka"}
             </button>
           </div>
         </div>

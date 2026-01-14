@@ -5,6 +5,7 @@ import type { PortableTextBlock } from "@portabletext/types";
 import { PortableText } from "@portabletext/react";
 import { IoIosArrowUp } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
+import { usePageStore } from "../stores/pageStore";
 
 type Member = {
   name: string;
@@ -42,13 +43,16 @@ export const AboutPage: React.FC = () => {
   const [aboutData, setAboutData] = useState<AboutData | null>(null);
   const isLaptop = useIsLaptop();
   const [showMore, setShowmore] = useState(false);
+  const isEnglish = usePageStore((state) => state.isEnglish);
 
   const handleShowMore = () => {
     setShowmore(!showMore);
   };
 
+  const slug = isEnglish ? "aboutEng" : "about";
+
   const query = `
-*[_type == "page" && slug.current == "about"][0]{
+*[_type == "page" && slug.current == "${slug}"][0]{
   sections[_type == "aboutBlock"][0]{
     H2,
     IntroText,
@@ -84,11 +88,16 @@ export const AboutPage: React.FC = () => {
       console.log(data);
       setAboutData(data.sections);
     });
-  }, []);
+  }, [isEnglish]);
 
   console.log(aboutData);
+
+  if (!aboutData) {
+    return <div className="min-h-screen" />;
+  }
+
   return (
-    <section className="w-11/12 laptop:w-9/12 mx-auto mt-10 laptop:mt-18 flex flex-col gap-14">
+    <section className="animate-fadeIn w-11/12 laptop:w-9/12 mx-auto mt-10 laptop:mt-18 flex flex-col gap-14">
       <div className="flex justify-between">
         <div className="flex flex-col gap-8">
           <img
@@ -133,7 +142,9 @@ export const AboutPage: React.FC = () => {
       )}
       <div
         className={`border border-darkRed rounded-4xl ${
-          showMore ? "p-8 w-full tablet:w-fit laptop:min-w-[400px]" : " py-3 px-4 w-fit"
+          showMore
+            ? "p-8 w-full tablet:w-fit laptop:min-w-[400px]"
+            : " py-3 px-4 w-fit"
         } flex flex-col gap-8`}
       >
         <button
@@ -142,7 +153,8 @@ export const AboutPage: React.FC = () => {
           }`}
           onClick={() => handleShowMore()}
         >
-          Lista med medlemmar {showMore ? <IoIosArrowUp /> : <IoIosArrowDown />}
+          {isEnglish ? "List of members" : "Lista med medemmar"}{" "}
+          {showMore ? <IoIosArrowUp /> : <IoIosArrowDown />}
         </button>
         {showMore && (
           <ul className="flex flex-col gap-4 list-disc pl-6">

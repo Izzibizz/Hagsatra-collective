@@ -8,5 +8,6 @@ import introductionBlock from './schemas/introductionBlock'
 import welcomingBlock from './schemas/welcomingBlock'
 import contactBlock from './schemas/contactBlock'
 import aboutBlock from './schemas/aboutBlock'
+import studiosBlock from './schemas/studiosBlock'
 
-export const schemaTypes = [page, textBlock, imageBlock, videoBlock, heroBlock, bannerBlock, introductionBlock, welcomingBlock, contactBlock, aboutBlock]
+export const schemaTypes = [page, textBlock, imageBlock, videoBlock, heroBlock, bannerBlock, introductionBlock, welcomingBlock, contactBlock, aboutBlock, studiosBlock]

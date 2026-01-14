@@ -5,9 +5,9 @@ import { sanity } from "./library/SanityClient";
 import { Header } from "./components/Header"
 import { ScrollToTop } from "./components/ScrollToTop";
 import { Footer } from "./components/Footer";
-/* import { useIntroOnce } from "./hooks/useIntroOnce"; */
 import { WelcomingAnimation } from "./components/welcomingImageGrid/WelcomingAnimation";
 import { usePageStore } from "./stores/pageStore";
+import { LanguageButton } from "./components/LanguageButton";
 
 type WelcomingBlock = {
   _type: "welcomingBlock";
@@ -47,6 +47,7 @@ const hideIntro = usePageStore(state => state.hideIntro);
       <Header />
       <main className={`flex-grow mb-24 ${"pt-38 laptop:pt-24"} `}>
         <Routes />
+        <LanguageButton/>
       </main>
       <Footer/>
     </div>

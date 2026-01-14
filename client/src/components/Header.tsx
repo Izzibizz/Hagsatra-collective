@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, NavLink, useLocation } from "react-router-dom";
 import { MenuToggle } from "./MenuToggle";
+import { usePageStore } from "../stores/pageStore";
 
 export const Header: React.FC = () => {
   const navigate = useNavigate();
@@ -12,12 +13,13 @@ export const Header: React.FC = () => {
   const isHome = location.pathname === "/";
   const dropdownRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const { isEnglish } = usePageStore() 
 
   const navlinks = [
-    { name: "Lediga ateljéer", path: "/lediga-ateljeer" },
-    { name: "Aktiviteter", path: "/aktiviteter" },
-    { name: "Om oss", path: "/om-oss" },
-    { name: "Kontakt", path: "/kontakt" },
+    { sv: "Lediga ateljéer", eng: "Available studios", path: "/lediga-ateljeer" },
+    { sv: "Aktiviteter", eng: "Activities", path: "/aktiviteter" },
+    { sv: "Om oss", eng: "About us", path: "/om-oss" },
+    { sv: "Kontakt", eng: "Contact", path: "/kontakt" },
   ];
 
   const logoClick = () => {
@@ -155,7 +157,7 @@ export const Header: React.FC = () => {
                       onClick={closeMenu}
                       className="hover:scale-105 transform transition-transform duration-100"
                     >
-                      {link.name}
+                      {isEnglish? link.eng : link.sv}
                     </NavLink>
                   ))}
                 </ul>
@@ -176,7 +178,7 @@ export const Header: React.FC = () => {
                 onClick={closeMenu}
                 className="hover:scale-105 hover:text-white transform transition-transform duration-100"
               >
-                {link.name}
+              {isEnglish? link.eng : link.sv}
               </NavLink>
             ))}
           </ul>

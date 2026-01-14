@@ -5,12 +5,17 @@ import instagram from "/instagram.png";
 
 export const ContactPage: React.FC = () => {
   const contactData = usePageStore((state) => state.contactData);
+  const isEnglish = usePageStore((state) => state.isEnglish);
 
   console.log(contactData);
 
+  if (!contactData) {
+    return <div className="min-h-screen" />;
+  }
+
   return (
-    <section className="w-11/12 laptop:max-w-[1000px] mx-auto mt-6 mb-4 tablet:mt-10 laptop:mt-24 flex flex-col laptop:flex-row gap-10">
-      <div className="flex flex-col gap-10 px-6 tablet:grid grid-cols-2 laptop:flex">
+    <section className="animate-fadeIn w-11/12 laptop:max-w-[1000px] mx-auto mt-6 mb-4 tablet:mt-10 laptop:mt-24 flex flex-col laptop:flex-row gap-10 laptop:gap-20">
+      <div className="flex flex-col gap-16 px-6 tablet:grid grid-cols-2 laptop:flex">
         <div className="flex flex-col gap-6">
           <a
             href={contactData.instagram}
@@ -30,9 +35,11 @@ export const ContactPage: React.FC = () => {
           </a>
         </div>
         <div className="flex flex-col">
-          <h4>Besöksadress</h4>
-          <p className="text-sm">{contactData.address.street}</p>
-          <p className="text-sm">
+          <h4 className="font-bold">
+            {isEnglish ? "Address" : "Besöksadress"}
+          </h4>
+          <p className="">{contactData.address.street}</p>
+          <p className="">
             {contactData.address.postalCode} {contactData.address.city}
           </p>
         </div>
