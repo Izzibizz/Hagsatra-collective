@@ -17,7 +17,7 @@ export const Header: React.FC = () => {
 
   const navlinks = [
     { sv: "Lediga ateljéer", eng: "Available studios", path: "/lediga-ateljeer" },
-    { sv: "Aktiviteter", eng: "Activities", path: "/aktiviteter" },
+    { sv: "Verksamhet", eng: "Activities", path: "/verksamhet" },
     { sv: "Om oss", eng: "About us", path: "/om-oss" },
     { sv: "Kontakt", eng: "Contact", path: "/kontakt" },
   ];

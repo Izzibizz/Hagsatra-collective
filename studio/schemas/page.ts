@@ -40,6 +40,7 @@ export default defineType({
         {type: 'contactBlock'},
         {type: 'aboutBlock'},
         {type: 'studiosBlock'},
+        {type: 'activitiesBlock'}
       ],
     }),
   ],

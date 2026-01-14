@@ -3,7 +3,6 @@ import { NavLink } from "react-router";
 import { sanity } from "../library/SanityClient";
 import { useIsLaptop } from "../hooks/IsLaptop";
 import { usePageStore } from "../stores/pageStore";
-import { BannerDiv } from "../components/BannerDiv";
 
 export type AvailableStudio = {
   name: string;
@@ -63,8 +62,7 @@ export const FreeStudios: React.FC = () => {
   console.log(pageData, pageData?.sections[0].imageUrl);
 
   return (
-    <section className="animate-fadeIn w-11/12 laptop:max-w-[1200px] mx-auto mt-6 mb-4 tablet:mt-10 laptop:mt-24 flex flex-col gap-10">
-      <h2 className="text-lightRed">Våra ATELJEER</h2>
+    <section className="animate-fadeIn w-11/12 laptop:max-w-[1200px] mx-auto mt-6 mb-4 tablet:mt-10 laptop:mt-18 flex flex-col gap-10 laptop:gap-20">
       {showAvailableStudios ? (
         <>
           <img
@@ -107,7 +105,7 @@ export const FreeStudios: React.FC = () => {
                     {isEnglish ? "Available from" : "Tillgänglig fr.om."}{" "}
                     {studio.availableFrom}
                   </p>
-                  <NavLink to="/kontakt" className="self-end"><button className="bg-lightRed text-darkRed rounded-4xl px-4 py-2 w-fit">{isEnglish ? "Interested?" : "Intresserad?"}</button>
+                  <NavLink to="/kontakt" className="self-end"><button className="bg-lightRed text-darkRed rounded-4xl px-4 py-2 w-fit cursor-pointer">{isEnglish ? "Interested?" : "Intresserad?"}</button>
                 </NavLink></div>
               ))}
             </div>

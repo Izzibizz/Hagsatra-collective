@@ -16,7 +16,7 @@ const AppRoutes: React.FC = () => {
         <Route path="/om-oss" element={<AboutPage />} />
         <Route path="/kontakt" element={<ContactPage />} />
         <Route path="/lediga-ateljeer" element={<FreeStudios />} />
-        <Route path="/aktiviteter" element={<Activities />} />
+        <Route path="/verksamhet" element={<Activities />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
   );
