@@ -3,6 +3,7 @@ import { NavLink } from "react-router";
 import { sanity } from "../library/SanityClient";
 import { useIsLaptop } from "../hooks/IsLaptop";
 import { usePageStore } from "../stores/pageStore";
+import { BannerDiv } from "../components/BannerDiv";
 
 export type AvailableStudio = {
   name: string;
@@ -24,6 +25,7 @@ export type StudiosBlock = {
   description: string;
   availability: "yes" | "no";
   availableStudios?: AvailableStudio[];
+  bannerImageUrl: string;
 };
 
 type StudioPageData = {
@@ -71,8 +73,8 @@ export const FreeStudios: React.FC = () => {
                 ? pageData?.sections[0].h2AvailableLaptopImageUrl
                 : pageData?.sections[0].h2AvailableMobileImageUrl
             }
-            alt="våra ateljeer"
-            className="laptop:max-w-[800px]"
+            alt="våra lediga ateljeer"
+            className="laptop:max-w-[800px] laptop:self-center"
           />
           <img
             src={pageData?.sections[0].imageUrl}
@@ -122,13 +124,14 @@ export const FreeStudios: React.FC = () => {
           className="laptop:max-w-[800px]"
         />
       )}
-
+      <div className="laptop:max-w-[800px] flex flex-col gap-10 laptop:self-end">
       <img
         src={pageData?.sections[0].locationImageUrl}
         alt="planritning Hagsatra collective"
-        className="max-w-[800px]"
+        className=""
       />
-      <p className="laptop:max-w-[800px]">{pageData.sections[0].description}</p>
+      <p className="">{pageData.sections[0].description}</p>
+      </div>
     </section>
   );
 };

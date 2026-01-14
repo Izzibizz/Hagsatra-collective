@@ -99,5 +99,10 @@ export default defineType({
       title: 'location image URL',
       type: 'string',
     }),
+    defineField({
+      name: 'bannerImageUrl',
+      title: 'banner image URL',
+      type: 'string',
+    }),
   ],
 })
