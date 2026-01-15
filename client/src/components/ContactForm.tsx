@@ -74,8 +74,8 @@ export const ContactForm: React.FC = () => {
       noValidate
       className="bg-darkRed text-lightRed p-8 rounded-4xl flex flex-col gap-10 tablet:w-[90vw] laptop:min-w-[600px] laptop:w-[800px] tablet:self-center"
     >
-      <h3 className="font-hagsatra text-4xl text-center tablet:text-start">
-        {isEnglish ? "GET IN TOUCH" : "KONTAKTA OSS"}
+      <h3 className="text-4xl text-center tablet:text-start">
+        {isEnglish ? "Get in touch" : "Kontakta oss"}
       </h3>
       {state.succeeded ? (
         <div className="laptop:w-2/3 flex flex-col ">

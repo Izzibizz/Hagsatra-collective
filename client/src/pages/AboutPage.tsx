@@ -181,18 +181,6 @@ export const AboutPage: React.FC = () => {
           </ul>
         )}
       </div>
-      <div className="flex flex-col tablet:flex-row gap-8">
-        <img
-          src={aboutData?.activities.images[0].image}
-          className=" tablet:w-1/2 aspect-[3/2] object-cover"
-          alt="aktivitet"
-        />
-        <img
-          src={aboutData?.activities.images[1].image}
-          className="tablet:w-1/2 aspect-[3/2] object-cover tablet:max-w-[400px] laptop:max-w-[500px]"
-          alt="aktivitet"
-        />
-      </div>
     </section>
   );
 };
