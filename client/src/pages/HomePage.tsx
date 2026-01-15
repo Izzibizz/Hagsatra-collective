@@ -4,6 +4,7 @@ import { Hero } from "../components/Hero";
 import { Introductionsection } from "../components/IntroductionDiv";
 import { sanity } from "../library/SanityClient";
 import { usePageStore } from "../stores/pageStore";
+import { HomeHelmet } from "../components/HomeHelmet";
 
 type HeroBlock = {
   _type: "heroBlock";
@@ -70,32 +71,35 @@ export const HomePage: React.FC = () => {
   }, [isEnglish]);
 
   console.log(pageData);
-
   return (
-    !showIntro && (
-      <section className="bg-lightRed text-black animate-fadeIn">
-        {pageData?.sections.map((section, i) => {
-          switch (section._type) {
-            case "heroBlock":
-              return (
-                <Hero
-                  key={i}
-                  imageUrlLaptop={section.imageUrlLaptop}
-                  imageUrlMobile={section.imageUrlMobile}
-                  symbol={section.symbol}
-                />
-              );
-            case "bannerBlock":
-              return <BannerDiv key={i} imageUrl={section.imageUrl} />;
+    <>
+      <HomeHelmet />
+      {!showIntro && (
+        <section className="bg-lightRed text-black animate-fadeIn">
+          {pageData?.sections.map((section, i) => {
+            switch (section._type) {
+              case "heroBlock":
+                return (
+                  <Hero
+                    key={i}
+                    imageUrlLaptop={section.imageUrlLaptop}
+                    imageUrlMobile={section.imageUrlMobile}
+                    symbol={section.symbol}
+                  />
+                );
 
-            case "introductionBlock":
-              return <Introductionsection key={i} data={section} />;
+              case "bannerBlock":
+                return <BannerDiv key={i} imageUrl={section.imageUrl} />;
 
-            default:
-              return null;
-          }
-        })}
-      </section>
-    )
+              case "introductionBlock":
+                return <Introductionsection key={i} data={section} />;
+
+              default:
+                return null;
+            }
+          })}
+        </section>
+      )}
+    </>
   );
 };
