@@ -20,23 +20,7 @@ type AboutData = {
   titleImage: string;
   thanksTo: PortableTextBlock[];
   members?: Member[];
-  activities: {
-    h3: string;
-    body: string;
-    titleImage: string;
-    images: {
-      image: string;
-      caption?: string;
-    }[];
-  };
-  exhibitions: {
-    h3: string;
-    body: string;
-    images: {
-      image: string;
-      caption?: string;
-    }[];
-  };
+  ImageUrl: string;
 };
 
 export const AboutPage: React.FC = () => {
@@ -61,25 +45,7 @@ export const AboutPage: React.FC = () => {
     titleImage,
     thanksTo,
     members,
-
-    activities{
-      h3,
-      body,
-      titleImage,
-      images[]{
-        image,
-        caption
-      }
-    },
-
-    exhibitions{
-      h3,
-      body,
-      images[]{
-        image,
-        caption
-      }
-    }
+    ImageUrl
   }
 }
 `;
@@ -120,14 +86,14 @@ export const AboutPage: React.FC = () => {
         </div>
         {isLaptop && (
           <img
-            src={aboutData?.exhibitions.images[0].image}
+            src={aboutData?.ImageUrl}
             className="w-1/4 max-w-[500px] object-cover"
           />
         )}
       </div>
       {!isLaptop && (
         <img
-          src={aboutData?.exhibitions.images[0].image}
+          src={aboutData?.ImageUrl}
           className="tablet:w-1/2 object-cover"
         />
       )}

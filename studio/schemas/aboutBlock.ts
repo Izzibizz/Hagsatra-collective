@@ -54,8 +54,8 @@ export default defineType({
     }),
 
     defineField({
-      name: 'locationImageUrl',
-      title: 'location image URL',
+      name: 'ImageUrl',
+      title: 'Extra picture - describing us - image URL',
       type: 'url',
     }),
     defineField({
