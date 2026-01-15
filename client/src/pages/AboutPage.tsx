@@ -1,5 +1,5 @@
 import { sanity } from "../library/SanityClient";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useIsLaptop } from "../hooks/IsLaptop";
 import type { PortableTextBlock } from "@portabletext/types";
 import { PortableText } from "@portabletext/react";
@@ -44,6 +44,7 @@ export const AboutPage: React.FC = () => {
   const isLaptop = useIsLaptop();
   const [showMore, setShowmore] = useState(false);
   const isEnglish = usePageStore((state) => state.isEnglish);
+  const listRef = useRef<HTMLUListElement | null>(null);
 
   const handleShowMore = () => {
     setShowmore(!showMore);
@@ -89,6 +90,15 @@ export const AboutPage: React.FC = () => {
       setAboutData(data.sections);
     });
   }, [isEnglish]);
+
+  useEffect(() => {
+    if (showMore) {
+      listRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  }, [showMore]);
 
   console.log(aboutData);
 
@@ -157,7 +167,7 @@ export const AboutPage: React.FC = () => {
           {showMore ? <IoIosArrowUp /> : <IoIosArrowDown />}
         </button>
         {showMore && (
-          <ul className="flex flex-col gap-4 list-disc pl-6">
+          <ul className="flex flex-col gap-4 list-disc pl-6 scroll-mt-48" ref={listRef}>
             {aboutData?.members?.map((member, index) => (
               <li key={index}>
                 {member.link ? (
