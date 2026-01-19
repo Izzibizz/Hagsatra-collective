@@ -21,6 +21,7 @@ export type StudiosBlock = {
   h2AvailableLaptopImageUrl: string;
   h2AvailableMobileImageUrl: string;
   locationImageUrl: string;
+  descriptionH3: string;
   description: string;
   availability: "yes" | "no";
   availableStudios?: AvailableStudio[];
@@ -47,7 +48,7 @@ export const FreeStudios: React.FC = () => {
     title,
     sections[]
   }
-`
+`,
       )
       .then((data) => {
         console.log("FETCH RESULT:", data);
@@ -105,8 +106,12 @@ export const FreeStudios: React.FC = () => {
                     {isEnglish ? "Available from" : "Tillgänglig fr.om."}{" "}
                     {studio.availableFrom}
                   </p>
-                  <NavLink to="/kontakt" className="self-end"><button className="bg-lightRed text-darkRed rounded-4xl px-4 py-2 w-fit cursor-pointer">{isEnglish ? "Interested?" : "Intresserad?"}</button>
-                </NavLink></div>
+                  <NavLink to="/kontakt" className="self-end">
+                    <button className="bg-lightRed text-darkRed rounded-4xl px-4 py-2 w-fit cursor-pointer">
+                      {isEnglish ? "Interested?" : "Intresserad?"}
+                    </button>
+                  </NavLink>
+                </div>
               ))}
             </div>
           </div>
@@ -123,12 +128,17 @@ export const FreeStudios: React.FC = () => {
         />
       )}
       <div className="laptop:max-w-[800px] flex flex-col gap-10 laptop:self-end">
-      <img
-        src={pageData?.sections[0].locationImageUrl}
-        alt="planritning Hagsatra collective"
-        className=""
-      />
-      <p className="">{pageData.sections[0].description}</p>
+        <img
+          src={pageData?.sections[0].locationImageUrl}
+          alt="planritning Hagsatra collective"
+          className=""
+        />
+        <div className="flex flex-col gap-4">
+          <h3 className="text-xl font-bold">
+            {pageData?.sections[0]?.descriptionH3}
+          </h3>
+          <p className="">{pageData.sections[0].description}</p>
+        </div>
       </div>
     </section>
   );

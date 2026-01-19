@@ -30,12 +30,16 @@ export default defineType({
       title: 'h2 available text image URL for laptop',
       type: 'string',
     }),
+     defineField({
+      name: 'descriptionH3',
+      title: 'Title for description of studio spaces',
+      type: 'string',
+    }),
     defineField({
       name: 'description',
       title: 'description of studio spaces',
       type: 'string',
     }),
-    
     defineField({
       name: 'availability',
       title: 'Are there any studios available right now?',

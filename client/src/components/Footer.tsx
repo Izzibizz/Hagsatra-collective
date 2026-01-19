@@ -33,7 +33,7 @@ export const Footer: React.FC = () => {
 
   console.log(contactData);
   return (
-    <footer className="flex flex-col gap-10 w-screen h-fit p-2 laptop:px-6 font-sans text-darkRed">
+    <footer className="flex flex-col gap-10 w-screen h-fit p-2 laptop:px-6 text-darkRed">
       {showContactInfo && (
         <div className="flex flex-col tablet:flex-row tablet:justify-between laptop:w-2/3 laptop:max-w-[800px] tablet:mx-auto gap-8 px-6">
           <a
