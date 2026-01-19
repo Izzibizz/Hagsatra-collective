@@ -6,6 +6,7 @@ import { usePageStore } from "../stores/pageStore";
 import type { PortableTextBlock } from "@portabletext/types";
 import { PortableText } from "@portabletext/react";
 
+
 // Gemensam bildtyp för gallerier
 export type SanityImageItem = {
   image: string; // URL
@@ -32,6 +33,7 @@ export type ActivitiesBlock = {
   _type: "activitiesBlock";
   activities?: ActivitiesSection;
   exhibitions?: ExhibitionsSection;
+  bannerImageUrl: string;
 };
 
 export type PageData = {
@@ -44,7 +46,7 @@ export const Activities: React.FC = () => {
   const isEnglish = usePageStore((state) => state.isEnglish);
   const isLaptop = useIsLaptop();
   const activitiesBlock = pageData?.sections?.find(
-    (section) => section._type === "activitiesBlock"
+    (section) => section._type === "activitiesBlock",
   );
 
   useEffect(() => {
@@ -56,7 +58,7 @@ export const Activities: React.FC = () => {
     title,
     sections[]
   }
-`
+`,
       )
       .then((data) => {
         console.log("FETCH RESULT:", data);
@@ -71,7 +73,7 @@ export const Activities: React.FC = () => {
   console.log(pageData);
 
   return (
-    <section className="animate-fadeIn w-11/12 laptop:max-w-[1200px] mx-auto mt-6 mb-4 tablet:mt-10 laptop:mt-24 flex flex-col gap-10">
+    <section className="animate-fadeIn w-11/12 laptop:max-w-[1200px] mx-auto mt-6 mb-10 laptop:mb-24  tablet:mt-10 laptop:mt-24 flex flex-col gap-10">
       <img
         src={
           isLaptop

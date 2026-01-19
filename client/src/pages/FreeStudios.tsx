@@ -63,7 +63,7 @@ export const FreeStudios: React.FC = () => {
   console.log(pageData, pageData?.sections[0].imageUrl);
 
   return (
-    <section className="animate-fadeIn w-11/12 laptop:max-w-[1200px] mx-auto mt-6 mb-4 tablet:mt-10 laptop:mt-18 flex flex-col gap-10 laptop:gap-20">
+    <section className="animate-fadeIn w-11/12 laptop:max-w-[1200px] mx-auto mt-6 mb-10 laptop:mb-24 tablet:mt-10 laptop:mt-18 flex flex-col gap-10 laptop:gap-20">
       {showAvailableStudios ? (
         <>
           <img

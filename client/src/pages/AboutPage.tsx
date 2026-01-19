@@ -73,7 +73,7 @@ export const AboutPage: React.FC = () => {
   }
 
   return (
-    <section className="animate-fadeIn w-11/12 laptop:w-9/12 mx-auto mt-10 laptop:mt-18 flex flex-col gap-14">
+    <section className="animate-fadeIn w-11/12 laptop:w-9/12 mx-auto mt-10 laptop:mt-18 mb-10 laptop:mb-24 flex flex-col gap-14">
       <div className="flex justify-between">
         <div className="flex flex-col gap-8">
           <img

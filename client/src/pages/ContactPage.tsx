@@ -14,7 +14,7 @@ export const ContactPage: React.FC = () => {
   }
 
   return (
-    <section className="animate-fadeIn w-11/12 laptop:max-w-[1000px] mx-auto mt-6 mb-4 tablet:mt-10 laptop:mt-24 flex flex-col laptop:flex-row gap-10 laptop:gap-20">
+    <section className="animate-fadeIn w-11/12 laptop:max-w-[1000px] mx-auto mt-6 mb-10 laptop:mb-24 tablet:mt-10 laptop:mt-24 flex flex-col laptop:flex-row gap-10 laptop:gap-20">
       <div className="flex flex-col gap-16 px-6 tablet:grid grid-cols-2 laptop:flex">
         <div className="flex flex-col gap-6">
           <a

@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { BannerDiv } from "../components/BannerDiv";
 import { Hero } from "../components/Hero";
 import { Introductionsection } from "../components/IntroductionDiv";
 import { sanity } from "../library/SanityClient";
@@ -13,10 +12,6 @@ type HeroBlock = {
   symbol: string;
 };
 
-type BannerBlock = {
-  _type: "bannerBlock";
-  imageUrl: string;
-};
 
 type TextBlock = {
   _type: "textBlock";
@@ -32,7 +27,7 @@ type IntroductionBlock = {
   interval?: number;
 };
 
-type Section = HeroBlock | IntroductionBlock | BannerBlock | TextBlock;
+type Section = HeroBlock | IntroductionBlock | TextBlock;
 
 type Page = {
   title: string;
@@ -87,9 +82,6 @@ export const HomePage: React.FC = () => {
                     symbol={section.symbol}
                   />
                 );
-
-              case "bannerBlock":
-                return <BannerDiv key={i} imageUrl={section.imageUrl} />;
 
               case "introductionBlock":
                 return <Introductionsection key={i} data={section} />;

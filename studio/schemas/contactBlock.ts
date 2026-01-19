@@ -31,5 +31,10 @@ export default defineType({
         },
       ],
     }),
+        defineField({
+      name: "bannerImageUrl",
+      title: "Banner image URL",
+      type: "string",
+    }),
   ],
 })
