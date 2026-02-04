@@ -117,15 +117,33 @@ export const FreeStudios: React.FC = () => {
           </div>
         </>
       ) : (
-        <img
-          src={
-            isLaptop
-              ? pageData?.sections[0].h2LaptopImageUrl
-              : pageData?.sections[0].h2MobileImageUrl
-          }
-          alt="våra ateljeer"
-          className="laptop:max-w-[800px]"
-        />
+        <>
+          <img
+            src={
+              isLaptop
+                ? pageData?.sections[0].h2LaptopImageUrl
+                : pageData?.sections[0].h2MobileImageUrl
+            }
+            alt="våra ateljeer"
+            className="laptop:max-w-[800px]"
+          />
+          <img
+            src={pageData?.sections[0].imageUrl}
+            alt="planritning Hagsatra collective"
+            className=""
+          />
+          {isEnglish ? (
+            <div className="flex flex-col gap-4">
+            <h3 className="font-bold text-2xl">Availability</h3>
+            <p>Currently we have no available studios</p>
+            </div>
+          ) : (
+              <div className="flex flex-col gap-4">
+            <h3 className="font-bold text-2xl">Tillgänglighet</h3>
+            <p>Just nu har vi inga lediga ateljèer</p>
+            </div>
+          )}
+        </>
       )}
       <div className="laptop:max-w-[800px] flex flex-col gap-10 laptop:self-end">
         <img
